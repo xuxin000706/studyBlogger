@@ -1,4 +1,4 @@
-## 1、读取数据文件和配置文件路径，结果为：
+#### 1、读取数据文件和配置文件路径，结果为：
 >data_dir：数据文件路径
 >config_file：配置文件路径
     std::string data_dir;
@@ -19,7 +19,7 @@
     else {
         config_file = std::string(argv[2]);
     }
-####2、定义一个Stereo_camera_config_t结构体变量stereo_param
+#### 2、定义一个Stereo_camera_config_t结构体变量stereo_param
 >
     typedef struct {
     std::string cam0_distortion_model;//畸变模型
@@ -39,7 +39,7 @@
     double R_imu_body[9];
     double t_imu_body[3];
     } Stereo_camera_config_t;//立体图像配置
-####3、把config_file路径下的的yaml文件中参数读取到上述Stereo_camera_config_t结构体中
+#### 3、把config_file路径下的的yaml文件中参数读取到上述Stereo_camera_config_t结构体中
     loadCaliParameters(config_file, stereo_param);
 loadCaliParameters解析如下：
 >参数：为yaml配置文件路径和Stereo_camera_config_t结构体变量。
@@ -172,7 +172,7 @@ ymal配置文件如下所示
     memcpy(stereo_param.t_imu_body, t_imu_body.data, sizeof(double)* 3);
 ```
 loadCaliParameters函数结束，已将config_file配置文件赋值给Stereo_camera_config_t结构体
-####4、读取imu数据
+#### 4、读取imu数据
 创建Sensor_imu_t结构体的vector数组，使用read_imu_data函数读取。
 ①Sensor_imu_t结构体如下：
 ```
@@ -284,7 +284,7 @@ std::vector<std::string>& image_list)
     }
 ```
 最后给timestamp、image_list赋值，循环结束。
-####6、创建三个线程
+#### 6、创建三个线程
 ```
     MsckfSystem *pSystem = new MsckfSystem(stereo_param);
     pSystem->reset();
@@ -299,7 +299,7 @@ std::vector<std::string>& image_list)
         new std::thread(&MsckfSystem::showResult, pSystem);
 ```
   [1]: https://xin.zyong.vip/usr/uploads/2022/02/1601087183.png
-####7、for循环读取每一帧图像并解算
+#### 7、for循环读取每一帧图像并解算
 在循环之前定义两个相机矩阵cam0和cam1，Sensor_imu_t结构体组。
 ```
  cv::Mat cam0, cam1;
